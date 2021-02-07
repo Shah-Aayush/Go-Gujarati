@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Go ગુજરાતી</string>
+    <string name="category_phrases">"શબ્દસમૂહ "</string>
+    <string name="category_colors">"રંગો "</string>
+    <string name="category_numbers">"સંખ્યાઓ "</string>
+    <string name="category_family">"કુટુંબ સભ્યો "</string>
+</resources>
