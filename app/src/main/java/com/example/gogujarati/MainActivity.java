@@ -1,6 +1,7 @@
 package com.example.gogujarati;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,63 +11,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.tabs.TabLayout;
+
 public class MainActivity extends AppCompatActivity {
+
+    //UI-changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setClickListeners();
-    }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return true;
-    }
+        // Find the view pager that will allow the user to swipe between fragments
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-    private void setClickListeners(){
+        // Create an adapter that knows which fragment should be shown on each page
+        CategoryAdapter adapter = new CategoryAdapter(getSupportFragmentManager());
 
-        TextView numbersView = (TextView) findViewById(R.id.numbers);
-        numbersView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        // Set the adapter onto the view pager
+        viewPager.setAdapter(adapter);
 
-                //METHOD 1
-//                Context mainContext = v.getContext();
-//                Intent numbersIntent = new Intent(mainContext,NumbersActivity.class);
-//                mainContext.startActivity(numbersIntent);
+        // Find the tab layout that shows the tabs
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-                //METHOD 2
-                Intent numbersIntent = new Intent(MainActivity.this,NumbersActivity.class);
-                startActivity(numbersIntent);
-            }
-        });
+        // Connect the tab layout with the view pager. This will
+        //   1. Update the tab layout when the view pager is swiped
+        //   2. Update the view pager when a tab is selected
+        //   3. Set the tab layout's tab names with the view pager's adapter's titles
+        //      by calling onPageTitle()
+        tabLayout.setupWithViewPager(viewPager);
 
-        TextView colorsView = (TextView) findViewById(R.id.colors);
-        colorsView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent colorsIntent = new Intent(MainActivity.this,ColorsActivity.class);
-                startActivity(colorsIntent);
-            }
-        });
-
-        TextView familyView = (TextView) findViewById(R.id.family);
-        familyView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent familyIntent = new Intent(MainActivity.this,FamilyActivity.class);
-                startActivity(familyIntent);
-            }
-        });
-
-        TextView phrasesView = (TextView) findViewById(R.id.phrases);
-        phrasesView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent phrasesIntent = new Intent(MainActivity.this,PhrasesActivity.class);
-                startActivity(phrasesIntent);
-            }
-        });
     }
 
 }
